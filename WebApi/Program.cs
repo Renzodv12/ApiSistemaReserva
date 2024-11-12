@@ -20,7 +20,7 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen(c =>
 {
-    // Configuración del esquema de seguridad para JWT
+    // Configuraciï¿½n del esquema de seguridad para JWT
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Name = "Authorization",
@@ -57,7 +57,7 @@ builder.Services.AddHangfire(config => config
     .UsePostgreSqlStorage(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddHangfireServer();
-// Configuración de JWT
+// Configuraciï¿½n de JWT
 var key = Encoding.ASCII.GetBytes(builder.Configuration["Jwt:SecretKey"]);
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -78,13 +78,13 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             {
                 OnAuthenticationFailed = context =>
                 {
-                    // Aquí puedes ver los detalles del error
+                    // Aquï¿½ puedes ver los detalles del error
                     Console.WriteLine("Authentication failed: " + context.Exception.Message);
                     return Task.CompletedTask;
                 },
                 OnTokenValidated = context =>
                 {
-                    // Aquí puedes ver si el token fue validado correctamente
+                    // Aquï¿½ puedes ver si el token fue validado correctamente
                     Console.WriteLine("Token validated");
                     return Task.CompletedTask;
                 }
@@ -126,16 +126,16 @@ recurringJobManager.AddOrUpdate(
 
 logger.LogInformation("Sistema de recomendaciones inicializado y configurado");
 //Procesos 
-// Inicialización
+// Inicializaciï¿½n
 //var recommendationEngine = app.Services.GetRequiredService<RecommendationEngine>();
 await recommendationEngine.InitializeModel();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
+//if (app.Environment.IsDevelopment())
+//{
     app.UseSwagger();
     app.UseSwaggerUI();
-}
+//}
 
 app.UseHttpsRedirection();
 
