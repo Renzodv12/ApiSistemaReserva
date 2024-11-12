@@ -104,7 +104,17 @@ builder.Services.AddLogging(logging =>
     logging.AddDebug();
 });
 
+//CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CorsPolicity",
+    builder => builder.WithOrigins("http://localhost:5173/")
+    .AllowAnyMethod()
+    .AllowAnyHeader()
+    .AllowCredentials()
 
+    );
+});
 
 var app = builder.Build();
 app.UseHangfireDashboard("/hangfire", new DashboardOptions
