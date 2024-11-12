@@ -159,21 +159,24 @@ namespace Reservas.Controllers
 
         // GET: api/Cancha/{id}/disponibilidad?fecha=2023-11-13
         [HttpGet("{id}/disponibilidad")]
-        public async Task<IActionResult> GetDisponibilidad(int id, DateTime fecha)
+        public async Task<IActionResult> GetDisponibilidad(int id, DateTime fecha, DateTime fechafin)
         {
             // Buscamos la cancha y cargamos sus horarios y reservas
             var cancha = await _context.Canchas
                 .Include(c => c.Horarios)
                 .FirstOrDefaultAsync(c => c.Id == id);
+            var reservas = await _context.Reservas.Where(x => x.IdCancha == id).ToListAsync();
 
             if (cancha == null)
                 return NotFound("Cancha no encontrada.");
 
+            var fechainicio = fecha.Date;
+            var fechafindeldia = fechainicio.AddDays(1).AddMilliseconds(-1);
             // Filtrar horarios disponibles para la fecha específica
                var horariosDisponibles = cancha.Horarios
-                .Where(h => h.Fecha.Date == fecha.Date &&
-                            !cancha.Reservas.Any(r => r.FechaHoraFin.Date == fecha.Date 
-                                                   ))
+                .Where(h => h.Fecha >= fechainicio && h.Fecha<= fechafindeldia && !reservas.Any(r => r.FechaHoraInicio.Date >= fecha.Date 
+                            && r.FechaHoraFin <= fechafin
+                                                   ) == true)
                .Select(h => new
                 {
                     h.HoraInicio,
