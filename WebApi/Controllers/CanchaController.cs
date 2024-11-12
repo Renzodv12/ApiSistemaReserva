@@ -61,6 +61,7 @@ namespace Reservas.Controllers
             var query = _context.Canchas
                 .Include(c => c.Deporte)
                 .Include(c => c.Localidad)
+                .Include(c => c.Horarios)
                 .AsQueryable();
 
             // Filtrar por localidad
