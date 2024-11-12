@@ -105,9 +105,10 @@ builder.Services.AddLogging(logging =>
 });
 
 //CORS
+var policity = "CorsPolicity";
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("CorsPolicity",
+    options.AddPolicy(policity,
     builder => builder.WithOrigins("http://localhost:5173/")
     .AllowAnyMethod()
     .AllowAnyHeader()
@@ -117,6 +118,8 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
+
+app.UseCors(policity);
 app.UseHangfireDashboard("/hangfire", new DashboardOptions
 {
     //Authorization = new[] { new HangfireAuthorizationFilter() }
