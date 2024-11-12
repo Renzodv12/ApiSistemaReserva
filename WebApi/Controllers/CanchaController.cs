@@ -22,12 +22,15 @@ namespace Reservas.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Cancha>>> GetCanchas()
         {
-            var canchas = await _context.Canchas
+  var canchas = await _context.Canchas
                 .Include(c => c.Deporte)
                 .Include(c => c.Localidad)
+                .Include(c => c.Horarios)
                 .ToListAsync();
-
+     
             return Ok(canchas);
+           
+          
         }
 
         // GET: api/Cancha/5
@@ -35,7 +38,7 @@ namespace Reservas.Controllers
         public async Task<ActionResult<Cancha>> GetCancha(int id)
         {
             var cancha = await _context.Canchas
-                .Include(c => c.Deporte )
+                .Include(c => c.Deporte)
                 .Include(c => c.Localidad)
                 .FirstOrDefaultAsync(c => c.Id == id);
 
@@ -151,6 +154,34 @@ namespace Reservas.Controllers
         private bool CanchaExists(int id)
         {
             return _context.Canchas.Any(c => c.Id == id);
+        }
+
+
+        // GET: api/Cancha/{id}/disponibilidad?fecha=2023-11-13
+        [HttpGet("{id}/disponibilidad")]
+        public async Task<IActionResult> GetDisponibilidad(int id, DateTime fecha)
+        {
+            // Buscamos la cancha y cargamos sus horarios y reservas
+            var cancha = await _context.Canchas
+                .Include(c => c.Horarios)
+                .FirstOrDefaultAsync(c => c.Id == id);
+
+            if (cancha == null)
+                return NotFound("Cancha no encontrada.");
+
+            // Filtrar horarios disponibles para la fecha específica
+               var horariosDisponibles = cancha.Horarios
+                .Where(h => h.Fecha.Date == fecha.Date &&
+                            !cancha.Reservas.Any(r => r.FechaHoraFin.Date == fecha.Date 
+                                                   ))
+               .Select(h => new
+                {
+                    h.HoraInicio,
+                    h.HoraFin
+                })
+                .ToList();
+
+            return Ok(horariosDisponibles);
         }
     }
 }

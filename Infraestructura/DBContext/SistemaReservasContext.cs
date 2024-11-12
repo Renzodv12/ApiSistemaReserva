@@ -23,6 +23,7 @@ namespace Infraestructura.DBContext
             public DbSet<Cancha> Canchas { get; set; }
             public DbSet<Reserva> Reservas { get; set; }
             public DbSet<Recomendacion> Recomendaciones { get; set; }
+            public DbSet<Horario> Horario { get; set; }
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {   
@@ -33,6 +34,8 @@ namespace Infraestructura.DBContext
                 modelBuilder.ApplyConfiguration(new CanchaConfiguration());
                 modelBuilder.ApplyConfiguration(new ReservaConfiguration());
                 modelBuilder.ApplyConfiguration(new RecomendacionConfiguration());
+                modelBuilder.ApplyConfiguration(new HorarioConfiguration());
+
                 // Configuración adicional de entidades
                 base.OnModelCreating(modelBuilder);
             }

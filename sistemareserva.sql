@@ -214,3 +214,35 @@ INSERT INTO RESERVAS (id_usuario, id_cancha, fecha_hora_inicio, fecha_hora_fin, 
 
 INSERT INTO RESERVAS (id_usuario, id_cancha, fecha_hora_inicio, fecha_hora_fin, precio_total, estado) VALUES (1, 6, '2024-11-16 10:00', '2024-11-16 11:00', 90.00, 'Confirmada');
 INSERT INTO RESERVAS (id_usuario, id_cancha, fecha_hora_inicio, fecha_hora_fin, precio_total, estado) VALUES (2, 7, '2024-11-16 11:00', '2024-11-16 12:00', 110.00, 'Pendiente');
+
+
+
+
+CREATE TABLE horario (
+    id SERIAL PRIMARY KEY,
+    canchaid INTEGER NOT NULL,
+    fecha DATE NOT NULL,
+    horainicio TIME NOT NULL,
+    horafin TIME NOT NULL,
+    CONSTRAINT fk_horario_cancha FOREIGN KEY (canchaid) REFERENCES canchas(id)
+);
+INSERT INTO Horario (CanchaId, Fecha, HoraInicio, HoraFin) VALUES (1, '2024-11-16', '08:00:00', '09:00:00');
+INSERT INTO Horario (CanchaId, Fecha, HoraInicio, HoraFin) VALUES (1, '2024-11-16', '09:00:00', '10:00:00');
+INSERT INTO Horario (CanchaId, Fecha, HoraInicio, HoraFin) VALUES (1, '2024-11-16', '10:00:00', '11:00:00');
+INSERT INTO Horario (CanchaId, Fecha, HoraInicio, HoraFin) VALUES (2, '2024-11-16', '08:00:00', '09:00:00');
+INSERT INTO Horario (CanchaId, Fecha, HoraInicio, HoraFin) VALUES (2, '2024-11-16', '09:00:00', '10:00:00');
+INSERT INTO Horario (CanchaId, Fecha, HoraInicio, HoraFin) VALUES (2, '2024-11-16', '10:00:00', '11:00:00');
+INSERT INTO Horario (CanchaId, Fecha, HoraInicio, HoraFin) VALUES (3, '2024-11-16', '08:00:00', '09:00:00');
+INSERT INTO Horario (CanchaId, Fecha, HoraInicio, HoraFin) VALUES (3, '2024-11-16', '09:00:00', '10:00:00');
+INSERT INTO Horario (CanchaId, Fecha, HoraInicio, HoraFin) VALUES (3, '2024-11-16', '10:00:00', '11:00:00');
+INSERT INTO Horario (CanchaId, Fecha, HoraInicio, HoraFin) VALUES (4, '2024-11-16', '08:00:00', '09:00:00');
+INSERT INTO Horario (CanchaId, Fecha, HoraInicio, HoraFin) VALUES (4, '2024-11-16', '09:00:00', '10:00:00');
+INSERT INTO Horario (CanchaId, Fecha, HoraInicio, HoraFin) VALUES (4, '2024-11-16', '10:00:00', '11:00:00');
+INSERT INTO Horario (CanchaId, Fecha, HoraInicio, HoraFin) VALUES (5, '2024-11-16', '08:00:00', '09:00:00');
+INSERT INTO Horario (CanchaId, Fecha, HoraInicio, HoraFin) VALUES (5, '2024-11-16', '09:00:00', '10:00:00');
+INSERT INTO Horario (CanchaId, Fecha, HoraInicio, HoraFin) VALUES (5, '2024-11-16', '10:00:00', '11:00:00');
+INSERT INTO Horario (CanchaId, Fecha, HoraInicio, HoraFin) VALUES (6, '2024-11-16', '08:00:00', '09:00:00');
+INSERT INTO Horario (CanchaId, Fecha, HoraInicio, HoraFin) VALUES (6, '2024-11-16', '09:00:00', '10:00:00');
+INSERT INTO Horario (CanchaId, Fecha, HoraInicio, HoraFin) VALUES (6, '2024-11-16', '10:00:00', '11:00:00');
+INSERT INTO Horario (CanchaId, Fecha, HoraInicio, HoraFin) VALUES (7, '2024-11-16', '08:00:00', '09:00:00');
+INSERT INTO Horario (CanchaId, Fecha, HoraInicio, HoraFin) VALUES (7, '2024-11-16', '09:00:00', '10:00:00');

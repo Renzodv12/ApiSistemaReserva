@@ -17,6 +17,9 @@ namespace Core.Entities
 
         public Deporte Deporte { get; set; } = null!;
         public Localidad Localidad { get; set; } = null!;
+         public ICollection<Horario> Horarios { get; set; } = new List<Horario>();
+      
+
     }
 }
 
