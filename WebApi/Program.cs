@@ -133,7 +133,7 @@ var recurringJobManager = app.Services.GetRequiredService<IRecurringJobManager>(
 recurringJobManager.AddOrUpdate(
     "reentrenamiento-modelo",
     () => recommendationEngine.TrainModelAsync(),
-    Cron.Daily, // Reentrenamiento diario
+    "5 * * * *", // Reentrenamiento cada 5 minutos
     new RecurringJobOptions { TimeZone = TimeZoneInfo.Local }
 );
 

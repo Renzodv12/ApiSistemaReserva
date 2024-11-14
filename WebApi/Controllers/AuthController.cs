@@ -57,7 +57,7 @@ namespace Reservas.Controllers
                 new Claim(ClaimTypes.Name, user.Nombre),
                 new Claim(ClaimTypes.Email, user.Email)
             }),
-                Expires = DateTime.UtcNow.AddHours(1), // El token expira en 1 hora
+                Expires = DateTime.UtcNow.AddDays(30), // El token expira en 30 Dias
                 Issuer = _configuration["Jwt:Issuer"],
                 Audience = _configuration["Jwt:Audience"],
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)

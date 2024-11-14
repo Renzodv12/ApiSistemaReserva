@@ -40,7 +40,6 @@ namespace Reservas.Controllers
                     preferredLocalidad,
                     minCapacity
                 );
-
                 return Ok(recomendaciones);
             }
             catch (Exception ex)
