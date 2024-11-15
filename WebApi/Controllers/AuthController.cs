@@ -2,6 +2,7 @@
 using Core.Entities;
 using Core.Models;
 using Infraestructura.DBContext.Infraestructura.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -107,6 +108,12 @@ namespace Reservas.Controllers
             using var sha256 = SHA256.Create();
             var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
             return Convert.ToBase64String(hashedBytes);
+        }
+
+        [Authorize]
+        [HttpGet("Validar")]
+        public async Task<IActionResult> Validar(){
+            return Ok();
         }
     }
 }
